@@ -17,17 +17,17 @@
 
       const animation = entry.target.animate(
         [
-          { opacity: 0, transform: 'translateY(10px)' },
+          { opacity: 0, transform: 'translateY(18px)' },
           { opacity: 1, transform: 'translateY(0)' }
         ],
         {
-          duration: 460,
+          duration: 680,
           delay,
           easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
           fill: 'backwards'
         }
       );
-      delay = Math.min(delay + 45, 180);
+      delay = Math.min(delay + 80, 320);
       animations.add(animation);
       animation.onfinish = animation.oncancel = () => animations.delete(animation);
     }
