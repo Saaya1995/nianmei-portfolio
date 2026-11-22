@@ -1,0 +1,80 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>具身情感交互框架 · 周念梅</title><link rel="stylesheet" href="style.css"></head><body><article id="framework"><a class="back" href="index.html">← 返回作品集</a><header><h1>具身情感交互框架</h1><p class="role">从 50 篇论文中梳理身体动作、材料与多感官反馈如何支持情感体验。</p></header><p><strong>项目类型</strong>：系统性文献综述 / 情感交互 / 设计框架</p>
+<p><strong>个人贡献</strong>：第一作者，负责全部纳入文献的数据提取与初始编码，与合作者共同分析主题、迭代框架及讨论设计启示。</p>
+<p><strong>研究成果</strong>：发表于 ACM DIS 2024；纳入 50 篇论文，归并为 49 个分析条目，提炼三类设计考量与四个设计维度。</p>
+<h2 data-section="研究问题与方法"><span class="section-num" aria-hidden="true">01</span>研究问题与方法</h2>
+<p><strong>核心问题</strong>：身体动作、实体材料和多感官反馈，如何支持情感表达、理解与调节？</p>
+<p>遵循 PRISMA 流程，结合分类统计与归纳式主题分析，梳理系统的情感目标、输入输出、情感映射方式及用户评估结果。</p>
+<p>数据库检索获得 2,449 条记录，去重与初筛涉及 2,441 篇，全文评估 289 篇，最终纳入 50 篇。</p>
+<h2 data-section="研究发现实体交互如何支持情感体验"><span class="section-num" aria-hidden="true">02</span>研究发现：实体交互如何支持情感体验</h2>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 49%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr>
+<th>设计考量</th>
+<th>研究归纳</th>
+<th>对设计的启发</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>情感的具身化</td>
+<td>材料、温度、力度及运动可以承载情感隐喻，理解方式受个人与文化影响</td>
+<td>探索动作和材料的情感含义，并通过目标用户验证</td>
+</tr>
+<tr>
+<td>富有表现力的交互</td>
+<td>身体参与、多模态反馈及交互意味的模糊性，能够丰富情感表达</td>
+<td>围绕体验目标组织动作与反馈，给用户表达和解释的空间</td>
+</tr>
+<tr>
+<td>低干扰交互</td>
+<td>日常使用受到日常任务、注意力与社会环境影响</td>
+<td>支持轻量参与和中断，在真实场景中检查干扰与隐私问题</td>
+</tr>
+</tbody>
+</table>
+</div><h2 data-section="设计框架四个需要权衡的维度"><span class="section-num" aria-hidden="true">03</span>设计框架：四个需要权衡的维度</h2>
+<p>四个维度用于讨论设计取舍，各端点都有适用情境。</p><figure><a href="assets/affect-dimensions.svg"><img src="assets/affect-dimensions.svg" width="680" height="540" alt="四组设计取舍：参与从无意识采集到有意识操作，依据从常识与隐喻到经验证的理论，交互从低调到显眼，情感表达从开放到明确。"></a><figcaption>四条轴分别表示一个设计选择。点击查看大图。</figcaption></figure>
+<div class="table-scroll"><table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 52%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr>
+<th>设计维度</th>
+<th>两端及其取舍</th>
+<th>设计时需要回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户参与</td>
+<td>无意识采集降低注意负担；有意识操作支持主动表达与反思，但增加认知投入</td>
+<td>何时自动感知，何时邀请用户主动参与？</td>
+</tr>
+<tr>
+<td>理论依据</td>
+<td>常识与隐喻支持创意探索；已验证理论为情绪评估与干预提供依据</td>
+<td>哪些机制需要证据支持，哪些可通过设计探索？</td>
+</tr>
+<tr>
+<td>交互显著性</td>
+<td>低调交互保护隐私；显眼交互通常更有表现力，但也可能引发社交尴尬</td>
+<td>在目标场景中，交互会被谁注意到？用户是否想让交互被注意到？</td>
+</tr>
+<tr>
+<td>情感表达</td>
+<td>模糊表达保留解释空间，也可能造成困惑；明确表达易理解和测量，但限制主观解释</td>
+<td>哪些反馈需要清楚，哪些可以留给用户赋予意义？</td>
+</tr>
+</tbody>
+</table>
+</div><p><strong>向产品设计的转化</strong>：面向情绪陪伴产品，可用这四个维度检查交互方案：自动感知与主动输入如何配合，动作隐喻如何被理解，反馈是否适合公共环境，以及用户能否解释和修正系统对其情绪的判断。这是基于综述提出的应用思路，需在具体产品中验证。</p>
+<p><strong>论文</strong>：Zhou, N., Devleminck, S., &amp; Geurts, L. (2024). <em>Tangible Affect: A Literature Review of Tangible Interactive Systems Addressing Human Core Affect, Emotions and Moods.</em> ACM DIS. <a href="https://doi.org/10.1145/3643834.3661608">论文链接</a></p>
+<a class="back end" href="index.html">← 返回作品集</a></article></body></html>
