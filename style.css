@@ -16,3 +16,50 @@ article h3,#court h3{font-size:18px;font-weight:600;line-height:1.45;margin:24px
 .ai-node{background:#f3f6f0;border:1px solid #b5c2b4;border-radius:6px;text-align:center;padding:9px 5px;overflow-wrap:anywhere;font-size:15px}
 .ai-node small{display:block;font-size:12px}.profile-head{display:flex;align-items:center;justify-content:space-between;gap:16px}.profile-avatar{display:block;flex:none;width:104px;height:104px;overflow:visible}.profile-avatar img{display:block;width:100%;height:100%;object-fit:contain}
 @media(max-width:540px){.ai-map{gap:25px 6px;padding-inline:13px}.ai-node{font-size:13px}.profile-avatar{width:78px;height:78px}.section-num{flex:none}}
+
+/* Restrained movement for navigation and reading. */
+html {
+  scroll-padding-top: 24px;
+}
+.project,
+.project b,
+.back,
+.case-nav a {
+  transition: color 180ms ease, background-color 180ms ease,
+              transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .project:hover {
+    background-color: #f5f6f2;
+    transform: translateX(3px);
+  }
+  .project:hover b {
+    transform: translateX(3px);
+  }
+  .back:hover {
+    transform: translateX(-3px);
+  }
+}
+.project:focus-visible b {
+  transform: translateX(3px);
+}
+.case-nav a {
+  padding-block: 3px;
+}
+article h2[id] {
+  scroll-margin-top: 24px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project,
+  .project b,
+  .back,
+  .case-nav a {
+    transition: none;
+    transform: none !important;
+  }
+}
