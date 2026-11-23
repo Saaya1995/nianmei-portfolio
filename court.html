@@ -1,40 +1,43 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>宫阙春秋 · 周念梅</title><link rel="stylesheet" href="style.css?v=0dcc6b1758"><script src="assets/motion.js?v=c605b5cb9c" defer></script></head><body><article id="court"><a class="back" href="index.html">← 返回作品集</a><header><h1>宫阙春秋</h1><p class="role">AI 宫廷生活模拟。每个角色不仅拥有记忆、能够自主交互，还配有独立的语言风格、性格特征与背景卡片。</p></header><p><strong>项目类型</strong>：AI 原生游戏 / 社会模拟 / 生成式叙事</p>
-<p><strong>项目职责</strong>：独立完成产品策划、交互设计、AI 系统架构、原型开发与评测</p>
+<p><strong>个人贡献</strong>：独立完成产品策划、交互设计、AI 系统架构、原型开发与评测</p>
 <p><strong>核心技术</strong>：LLM · Utility AI · 角色记忆 · 叙事导演 · Godot</p>
-<nav class="case-nav" aria-label="本页目录"><a href="#overview">设计目标</a><a href="#experience">玩家体验</a><a href="#system">AI 架构</a><a href="#results">评测与反思</a></nav><h2 id="overview"><span class="section-num" aria-hidden="true">01</span>设计目标</h2>
-<p>《宫阙春秋》是一款融合 LLM 与传统游戏 AI 的开放式宫廷生活模拟游戏。玩家通过日常社交、情感互动与权谋博弈，参与由自主 NPC 构成的动态社会；共同经历会持续影响角色关系与后续事件。</p>
-<p>针对部分 AI 角色产品中互动被动、语言相似、叙事平淡及响应延迟的问题，确立三个目标：</p>
-<ul>
-<li><strong>人格鲜明</strong>：表达与决策符合角色身份、性格及经历。</li>
-<li><strong>关系持续</strong>：NPC 主动社交，并根据共同经历调整态度与行为。</li>
-<li><strong>故事有起伏</strong>：结合自由交互与事件调度，形成持续发展的故事。</li>
-</ul>
+
+<nav class="case-nav" aria-label="本页目录"><a href="#overview">背景与目标</a><a href="#design">设计思路</a><a href="#experience">核心体验</a><a href="#system">AI 架构</a><a href="#results">评测与迭代</a><a href="#reflection">设计总结</a></nav>
+<h2 id="overview"><span class="section-num" aria-hidden="true">01</span>项目背景与设计目标</h2>
+<p>《宫阙春秋》是一款融合 LLM 与传统游戏 AI 的开放式宫廷生活模拟游戏。玩家通过日常社交、身份晋升、情感互动与权谋博弈，参与由自主 NPC 共同构成的动态宫廷社会。共同经历会持续影响角色关系与后续事件。</p>
 <div class="case-gallery"><figure>
 <a href="assets/figure-1.webp"><img loading="lazy" width="2558" height="1434" src="assets/figure-1.webp" alt="游戏主界面">
-</a></figure>
-<figure>
+</a></figure><figure>
 <a href="assets/figure-2.webp"><img loading="lazy" width="2552" height="1434" src="assets/figure-2.webp" alt="日常事件">
-</a></figure>
-</div><h2 id="experience"><span class="section-num" aria-hidden="true">02</span>玩家如何与角色建立关系</h2><figure><video controls="controls" playsinline="playsinline" preload="metadata" poster="assets/figure-1.webp"><source src="assets/court.mp4" type="video/mp4"></source></video><figcaption>《宫阙春秋》实机演示</figcaption></figure><h3>角色如何主动社交</h3>
-<p><strong>多维人物关系</strong>：用亲近、信任、戒备、爱慕等维度描述角色关系，使态度不局限于单一好感度。</p>
-<p><strong>主动社交</strong>：NPC与玩家共用赠礼、邀约、示爱、流言传播、暗杀、偷情等社交机制，可以主动对玩家或其他NPC作出动作。</p>
-<p><strong>交互闭环</strong>：行动改变关系，经历进入记忆，关系与记忆再影响后续互动。</p>
+</a></figure></div>
+<figure><video controls="controls" playsinline="playsinline" preload="metadata" poster="assets/figure-1.webp"><source src="assets/court.mp4" type="video/mp4"></source></video><figcaption>《宫阙春秋》实机演示</figcaption></figure>
+<h3>从已有体验中识别问题</h3>
+<p>以《深宫曲》为代表的宫廷生活模拟游戏，展现了角色成长、复杂人际关系与戏剧性事件的吸引力。在项目调研中，我将部分 AI 宫斗产品的体验局限归纳为四点。</p>
+<ul><li><strong>角色缺乏自主性</strong>。互动主要由玩家发起，NPC 缺少持续运作的自主社交机制。</li><li><strong>角色语言同质化</strong>。人物设定存在差异，但实际表达缺乏辨识度。</li><li><strong>叙事节奏缺乏控制</strong>。开放式对话容易陷入重复、平淡的日常互动。</li><li><strong>模型调用影响响应速度</strong>。高频使用 LLM 规划行为，会增加等待时间与运行成本。</li></ul>
+<h3>核心设计目标</h3>
+<p>围绕这些问题，项目确立了三个体验目标。</p>
+<ul><li><strong>稳定且鲜明的人格</strong>。使角色的表达、决策与情感反馈符合身份、性格及历史经历。</li><li><strong>持续演化的关系</strong>。让角色拥有独立目标与社交行为，使关系随共同经历发生变化。</li><li><strong>持续产生故事的互动</strong>。通过动态事件与叙事节奏调控，兼顾自由交互与戏剧性体验。</li></ul>
+<h2 id="design"><span class="section-num" aria-hidden="true">02</span>设计思路与机制分工</h2>
+<p>玩家的每一次交互，都可能影响当前对话、人物关系、角色记忆及未来事件。</p>
+<p>围绕这一思路，项目将角色体验拆解为相互关联的几部分。</p>
+<div class="table-scroll"><table><thead><tr><th>体验目标</th><th>对应设计</th></tr></thead><tbody><tr><td>角色具有鲜明辨识度</td><td>结构化角色卡，分别约束人格、行为与语言表达</td></tr><tr><td>关系能够持续发展</td><td>多维人物关系、主动社交与长期记忆</td></tr><tr><td>互动持续产生故事</td><td>不同类型的动态事件与叙事导演</td></tr><tr><td>减少交互等待</td><td>Utility AI、LLM 与规则系统分工</td></tr></tbody></table></div>
+<h2 id="experience"><span class="section-num" aria-hidden="true">03</span>核心体验与交互机制</h2>
+<h3>角色如何主动建立关系</h3>
+<p>NPC 根据自身性格、目标、社会身份和人际关系，选择日常行动与交互对象。玩家与 NPC 共用赠礼、邀约、示爱、流言传播、暗杀及秘密幽会等社交机制。</p>
+<p>人物之间可以同时存在亲近、信任、戒备、爱慕等关系数值，使角色态度具有多种变化。行动改变关系，经历进入记忆，关系与记忆再影响后续互动。</p>
 <div class="case-gallery"><figure>
 <a href="assets/figure-3.webp"><img loading="lazy" width="2550" height="1432" src="assets/figure-3.webp" alt="刺绣邀约">
-</a><figcaption>NPC 主动邀请玩家刺绣</figcaption></figure>
-<figure>
+</a><figcaption>NPC 主动邀请玩家刺绣</figcaption></figure><figure>
 <a href="assets/figure-4.webp"><img loading="lazy" width="2550" height="1438" src="assets/figure-4.webp" alt="角色报信">
-</a><figcaption>NPC 得知暗杀风声后前来报信</figcaption></figure>
-<figure>
+</a><figcaption>NPC 得知暗杀风声后前来报信</figcaption></figure><figure>
 <a href="assets/figure-5.webp"><img loading="lazy" width="4211" height="2382" src="assets/figure-5.webp" alt="流言传播">
-</a><figcaption>NPC散播玩家谣言到第三人耳中</figcaption></figure>
-</div><h3>同一句话，角色如何回应</h3>
-<p>角色卡分开记录身份与背景、人格与行为、社会关系、记忆与经历、语言与表达。系统按事件提取相关信息：性格与目标影响角色想做什么，语言风格决定这句话怎样说出口。</p>
-<ul>
-<li><strong>语言风格</strong>：约束自称、对他人称谓、词汇、句式、语气及关系变化下的表达方式。</li>
-</ul>
-
-<p><strong>语言对比｜御花园偶遇不同 NPC，玩家输入同一句话：</strong>“我想再陪你待一会儿，你不会嫌我烦吧？”</p>
+</a><figcaption>NPC散播玩家谣言到第三人耳中</figcaption></figure></div>
+<h3>同一句话，角色如何回应</h3>
+<p>角色卡分别记录身份与背景、人格与行为、社会关系、记忆与经历、语言与表达。</p>
+<p>系统根据交互任务提取相关信息。性格与目标影响角色想做什么，语言风格决定这句话怎样说出口。语言约束涵盖称谓、词汇、句式、语气、修辞，以及关系变化下的表达差异。</p>
+<p><strong>语言对比</strong></p>
+<p>御花园偶遇不同 NPC，玩家输入同一句话。</p>
+<blockquote><p>我想再陪你待一会儿，你不会嫌我烦吧？</p></blockquote>
 <figure class="language-comparison"><div class="case-gallery"><figure>
 <a href="assets/figure-6.webp"><img loading="lazy" width="2560" height="1440" src="assets/figure-6.webp" alt="贵妃的回答">
 </a></figure>
@@ -44,77 +47,26 @@
 <figure>
 <a href="assets/figure-8.webp"><img loading="lazy" width="2560" height="1440" src="assets/figure-8.webp" alt="秀女的回答">
 </a></figure>
-</div><figcaption>点击放大图片。</figcaption></figure><h3>共同经历如何影响下一次互动</h3>
-<ul>
-<li><strong>即时记忆</strong>：维持当前会话与互动上下文。</li>
-<li><strong>长期记忆</strong>：记录日常经历、人物评价与关系变化。</li>
-<li><strong>重要人生记忆</strong>：保留重大情绪事件及改变人物关系的关键经历。</li>
-</ul>
-<p>角色会根据自身人格，对同一事件形成不同解释。例如，一次示好可能被天真的角色理解为友好行为，也可能被谨慎多疑的角色视为别有用心。</p>
-<p><strong>主观记忆与客观世界状态分离</strong></p>
-<p>限制角色能够获知的信息范围，减少无故知晓秘密或生成错误事实的情况。</p>
-<p><strong>交互示例｜NPC 在后续对话中回忆玩家曾公开维护自己</strong></p>
+</div><figcaption>点击放大图片。</figcaption></figure>
+<h3>共同经历如何影响下一次互动</h3>
+<p>角色会根据自身人格，对同一事件形成不同解释。一次公开维护可能被重情义的角色理解为恩情，也可能被谨慎多疑的角色视为别有用心。</p>
+<p>记忆系统保留当前互动上下文、日常经历和重要人生事件，并将角色的主观记忆与客观世界状态分开，限制角色能够获知的信息范围。</p>
+<p><strong>交互示例</strong>　NPC 在后续对话中回忆玩家曾公开维护自己</p>
 <figure>
 <a href="assets/figure-9.webp"><img loading="lazy" width="2560" height="1436" src="assets/figure-9.webp" alt="回忆共同经历">
 </a></figure>
-<h3>用声音和场景传达情绪</h3><p>季节和昼夜通过场景色彩、光照和粒子呈现，环境音随地点与时间变化。宴会、私会和宫廷冲突另配事件音乐，用配器与节奏提示气氛变化，让玩家在读完对白前就能感受到场面的变化。</p><h2 id="system"><span class="section-num" aria-hidden="true">03</span>AI 架构</h2>
-<p>日常行动频繁发生。Utility AI 按人格、目标和关系为候选行动评分，再按概率选择行动及社交对象。只有进入具体事件才调用 LLM，分别用日常交流、情感互动或权谋冲突的叙事约束生成内容。规则系统负责校验结果并更新世界状态。</p>
-<figure><div class="ai-map"><svg aria-hidden="true"><defs><marker id="tip" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#698173"/></marker></defs><g></g></svg><div class="ai-node" data-node="player" style="grid-area:1/1">玩家交互</div><div class="ai-node" data-node="action" style="grid-area:1/2">Utility AI<small>NPC 自主行为</small></div><div class="ai-node" data-node="director" style="grid-area:1/3">叙事导演<small>事件与节奏调度</small></div><div class="ai-node" data-node="context" style="grid-area:2/2">交互情境与事件目标</div><div class="ai-node" data-node="memory" style="grid-area:2/3">角色卡与相关记忆</div><div class="ai-node" data-node="llm" style="grid-area:3/2">LLM 内容生成</div><div class="ai-node" data-node="rules" style="grid-area:4/2">规则约束与结果校验</div><div class="ai-node" data-node="world" style="grid-area:5/2">交互呈现与世界状态更新</div><div class="ai-node" data-node="record" style="grid-area:6/2">关系变化与记忆记录</div></div><figcaption>关系与记忆更新后，影响下一次主动行为和内容生成。</figcaption></figure><div class="table-scroll"><table>
-<colgroup>
-<col style="width: 19%">
-<col style="width: 80%">
-</colgroup>
-<thead>
-<tr>
-<th>模块</th>
-<th>职责</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Utility AI</td>
-<td>根据人格、关系、目标与状态计算行为效用，选择日常行动及社交对象</td>
-</tr>
-<tr>
-<td>LLM</td>
-<td>结合角色卡、记忆与情境生成文本，不同事件类型使用不同叙事约束</td>
-</tr>
-<tr>
-<td>规则系统</td>
-<td>维护客观世界状态，约束生成内容与事件结算</td>
-</tr>
-<tr>
-<td>叙事导演</td>
-<td>借鉴Left 4 Dead AI节奏设计，根据游戏进程、关系与近期事件，调整叙事节奏</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="results"><span class="section-num" aria-hidden="true">04</span>评测与设计反思</h2><h3>角色语言盲测</h3><p>采用 A/B 盲测比较不同角色卡设计、技术架构及 Prompt 方案，关注语言辨识度、人设一致性、对话自然度及幻觉。</p><h3>响应性能</h3>
-<p>性能测试关注延迟、降级率、重试率及 首次Token缓存命中率，通过更换任务内容降低重复请求对缓存命中结果的干扰（多次用相同任务内容进行评测容易造成缓存命中数值虚高）。</p>
-<div class="table-scroll"><table>
-<thead>
-<tr>
-<th>当前测试结果</th>
-<th>数值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>核心互动对话 p50 / p95 延迟</td>
-<td>2.97 / 3.69 秒</td>
-</tr>
-<tr>
-<td>核心互动对话 Token 缓存命中率</td>
-<td>69.4%</td>
-</tr>
-<tr>
-<td>八项服务的降级率</td>
-<td>当前样本中均为 0%</td>
-</tr>
-</tbody>
-</table>
-</div><p>具体测评数值如下：</p>
+<h3>用声音与场景传达情绪</h3>
+<p>季节和昼夜通过场景色彩、光照与粒子效果呈现，环境音随地点与时间变化。宴会、私会和宫廷冲突配有事件音乐，通过配器、节奏与氛围，为文本叙事提供额外的情绪线索。</p>
+<h2 id="system"><span class="section-num" aria-hidden="true">04</span>原型实现与 AI 架构</h2>
+<p>为兼顾角色自主性、内容丰富度与响应速度，项目采用 Utility AI、LLM 与规则系统协同的混合架构。</p>
+<figure><div class="ai-map"><svg aria-hidden="true"><defs><marker id="tip" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#698173"/></marker></defs><g></g></svg><div class="ai-node" data-node="player" style="grid-area:1/1">玩家交互</div><div class="ai-node" data-node="action" style="grid-area:1/2">Utility AI<small>NPC 自主行为</small></div><div class="ai-node" data-node="director" style="grid-area:1/3">叙事导演<small>事件与节奏调度</small></div><div class="ai-node" data-node="context" style="grid-area:2/2">交互情境与事件目标</div><div class="ai-node" data-node="memory" style="grid-area:2/3">角色卡与相关记忆</div><div class="ai-node" data-node="llm" style="grid-area:3/2">LLM 内容生成</div><div class="ai-node" data-node="rules" style="grid-area:4/2">规则约束与结果校验</div><div class="ai-node" data-node="world" style="grid-area:5/2">交互呈现与世界状态更新</div><div class="ai-node" data-node="record" style="grid-area:6/2">关系变化与记忆记录</div></div><figcaption>关系与记忆更新后，影响下一次主动行为和内容生成。</figcaption></figure>
+<ul><li><strong>Utility AI</strong> 根据人格、目标、关系与当前状态，为候选行为评分，再通过概率机制选择行动和社交对象。</li><li><strong>LLM</strong> 根据角色卡、相关记忆、事件目标与环境生成内容，并使用不同的叙事约束处理日常交流、情感互动与权谋冲突。</li><li><strong>规则系统</strong> 维护身份、关系、资源和世界事件，校验生成结果并更新状态。</li><li><strong>叙事导演</strong> 根据游戏进程、人物关系与近期事件，调度事件与叙事节奏。</li></ul>
+<p>这些模块共同形成「行动 → 事件生成 → 结果校验 → 世界状态更新 → 关系变化与记忆记录」的交互闭环。</p>
+<h2 id="results"><span class="section-num" aria-hidden="true">05</span>评测与迭代</h2>
+<h3>角色语言与内容质量</h3>
+<p>采用 A/B 盲测比较不同角色卡设计、技术架构与 Prompt 方案，关注语言辨识度、人设一致性、对话自然度，以及生成内容与历史经历的一致性。</p>
+<h3>响应性能</h3>
+<p>性能测试关注 p50、p95 延迟、降级率、重试率与 Token 缓存命中率。通过更换任务内容，降低重复请求对缓存结果的干扰。</p>
 <div class="table-scroll"><table>
 <thead>
 <tr>
@@ -184,6 +136,9 @@
 </tr>
 <tr><td>记忆整理</td><td>未列出</td><td>2.75</td><td>5.14</td><td>0%</td><td>10%</td><td>33.5%</td></tr><tr><td>关系反思</td><td>未列出</td><td>2.25</td><td>4.50</td><td>0%</td><td>0%</td><td>0%</td></tr></tbody>
 </table>
-</div><h3>下一步迭代</h3>
-<p>目前已实现 NPC 之间的自主互动、NPC 对玩家的主动社交及记忆机制，但情感体验仍有深化空间。后续计划增强浪漫互动中的暧昧与情感拉扯，突出秘密恋情的禁忌感与戏剧张力。同时，尚未实装的阴谋与把柄系统将进一步强化角色间的利益冲突与权力博弈，提升游戏的戏剧性与叙事深度。</p>
+</div>
+<p>当前测试中，核心互动对话服务的 p50 延迟为 <strong>2.97 秒</strong>，p95 为 <strong>3.69 秒</strong>，Token 缓存命中率为 <strong>69.4%</strong>。表中八项服务均未触发降级返回。</p>
+<h2 id="reflection"><span class="section-num" aria-hidden="true">06</span>设计总结与后续方向</h2>
+<p>《宫阙春秋》围绕人格一致性、自主行为、长期记忆与动态叙事，探索传统游戏 AI 与生成式 AI 在持续角色互动中的结合方式。</p>
+<p>目前已实现 NPC 之间的自主互动、NPC 对玩家的主动社交及记忆机制。后续计划增强浪漫互动中的暧昧与情感拉扯，深化秘密恋情的禁忌感与戏剧张力。尚未实装的阴谋与把柄系统，将进一步丰富人物之间的利益冲突与权力博弈。</p>
 <a class="back end" href="index.html">← 返回作品集</a></article><script src="assets/architecture.js"></script></body></html>
